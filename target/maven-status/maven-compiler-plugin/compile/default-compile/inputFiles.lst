@@ -1,0 +1,15 @@
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\controller\AlunoController.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\enums\Status.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\service\ServiceUsuario.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\enums\Curso.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\enums\Turno.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\exception\CriptoExistsException.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\exception\EmailExistsException.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\util\Util.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\repository\AlunoRepository.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\controller\UsuarioController.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\exception\ServiceExc.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\GerenciamentoAlunosApplication.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\model\Usuario.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\model\Aluno.java
+C:\xampp\htdocs\Gerenciaento de alunos\src\main\java\br\com\gerenciamento\repository\UsuarioRepository.java
