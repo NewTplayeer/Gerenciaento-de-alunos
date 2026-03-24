@@ -22,6 +22,12 @@ public class Aluno {
     @NotNull
     private String nome;
 
+    @Colum(name = "email")
+    @Size(max = 100)
+    @NotBlank(message = "O e-mail não pode ser vazio")
+    @NotNull
+    private String email;
+
     @Column(name = "matricula")
     @NotNull
     @Size(min = 3, message = "É necessário Gerar o número de matricula")
@@ -60,6 +66,14 @@ public class Aluno {
 
     public Curso getCurso() {
         return curso;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setCurso(Curso curso) {

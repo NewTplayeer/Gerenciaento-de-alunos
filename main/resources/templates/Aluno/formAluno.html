@@ -29,6 +29,19 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6 form-group offset-md-3">
+                    <div class="alert alert-danger" role="alert"
+                        th:if="${#fields.hasErrors('email')}">
+                        <label class="validation-message" th:erros="*{email}">
+                        </label>
+                    </div>
+                    <label>Email do Aluno:</label>
+                    <input class="form-control"
+                            placeholder="Ex: brenosouza@gmail.com"
+                            th:field="*{email}">
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-6 form-group offset-md-3">
