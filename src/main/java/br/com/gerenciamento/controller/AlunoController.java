@@ -30,9 +30,10 @@ public class AlunoController {
 
     @GetMapping("/calcular-media-enade")
     public String calcularMedia(Model model) {
-        Double media = repository.calcularMediaEnadeAlunosAtivos();
+        // CORREÇÃO: Alterado de 'repository' para 'alunoRepository'
+        Double media = alunoRepository.calcularMediaEnadeAlunosAtivos();
         model.addAttribute("mediaEnade", media != null ? media : 0.0);
-        return "home"; 
+        return "index"; // Certifique-se que o nome da sua home é 'index'
     }
 
     @PostMapping("InsertAlunos")
@@ -40,10 +41,11 @@ public class AlunoController {
         ModelAndView modelAndView = new ModelAndView();
         if(bindingResult.hasErrors()) {
             modelAndView.setViewName("Aluno/formAluno");
-            modelAndView.addObject("aluno");
+            // CORREÇÃO: É necessário passar o objeto 'aluno' de volta para manter os dados preenchidos
+            modelAndView.addObject("aluno", aluno); 
         } else {
-        modelAndView.setViewName("redirect:/alunos-adicionados");
-        alunoRepository.save(aluno);
+            modelAndView.setViewName("redirect:/alunos-adicionados");
+            alunoRepository.save(aluno);
         }
         return modelAndView;
     }

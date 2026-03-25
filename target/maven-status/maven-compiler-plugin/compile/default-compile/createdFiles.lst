@@ -1,0 +1,15 @@
+br\com\gerenciamento\GerenciamentoAlunosApplication.class
+br\com\gerenciamento\enums\Turno.class
+br\com\gerenciamento\exception\ServiceExc.class
+br\com\gerenciamento\service\ServiceUsuario.class
+br\com\gerenciamento\exception\CriptoExistsException.class
+br\com\gerenciamento\repository\UsuarioRepository.class
+br\com\gerenciamento\repository\AlunoRepository.class
+br\com\gerenciamento\exception\EmailExistsException.class
+br\com\gerenciamento\model\Usuario.class
+br\com\gerenciamento\enums\Status.class
+br\com\gerenciamento\util\Util.class
+br\com\gerenciamento\controller\AlunoController.class
+br\com\gerenciamento\model\Aluno.class
+br\com\gerenciamento\enums\Curso.class
+br\com\gerenciamento\controller\UsuarioController.class
