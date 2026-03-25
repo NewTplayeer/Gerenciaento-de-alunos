@@ -4,12 +4,8 @@ import br.com.gerenciamento.repository.AlunoRepository;
 import br.com.gerenciamento.model.Aluno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
@@ -22,99 +18,75 @@ public class AlunoController {
 
     @GetMapping("/inserirAlunos")
     public ModelAndView insertAlunos(Aluno aluno) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Aluno/formAluno");
-        modelAndView.addObject("aluno", new Aluno());
-        return modelAndView;
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Aluno/formAluno");
+        mv.addObject("aluno", new Aluno());
+        return mv;
     }
 
-    @GetMapping("/calcular-media-enade")
-    public String calcularMedia(Model model) {
-        // CORREÇÃO: Alterado de 'repository' para 'alunoRepository'
-        Double media = alunoRepository.calcularMediaEnadeAlunosAtivos();
-        model.addAttribute("mediaEnade", media != null ? media : 0.0);
-        return "index"; // Certifique-se que o nome da sua home é 'index'
-    }
-
-    @PostMapping("InsertAlunos")
-    public ModelAndView inserirAluno(@Valid Aluno aluno, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
-        if(bindingResult.hasErrors()) {
-            modelAndView.setViewName("Aluno/formAluno");
-            // CORREÇÃO: É necessário passar o objeto 'aluno' de volta para manter os dados preenchidos
-            modelAndView.addObject("aluno", aluno); 
+    @PostMapping("/inserirAlunos")
+    public ModelAndView inserirAluno(@Valid Aluno aluno, BindingResult br) {
+        ModelAndView mv = new ModelAndView();
+        if(br.hasErrors()) {
+            mv.setViewName("Aluno/formAluno");
+            mv.addObject("aluno", aluno);
         } else {
-            modelAndView.setViewName("redirect:/alunos-adicionados");
             alunoRepository.save(aluno);
+            mv.setViewName("redirect:/alunos-adicionados");
         }
-        return modelAndView;
+        return mv;
     }
 
-    @GetMapping("alunos-adicionados")
+    @GetMapping("/alunos-adicionados")
     public ModelAndView listagemAlunos() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Aluno/listAlunos");
-        modelAndView.addObject("alunosList", alunoRepository.findAll());
-        return modelAndView;
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Aluno/listAlunos");
+        mv.addObject("alunosList", alunoRepository.findAll());
+        return mv;
+    }
+
+    // --- NOVA ROTA ADICIONADA AQUI ---
+    // Serve para abrir a página de pesquisa quando você clica no menu
+    @GetMapping("/pesquisar-aluno")
+    public ModelAndView telaPesquisa() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Aluno/pesquisa-resultado"); 
+        mv.addObject("ListaDeAlunos", alunoRepository.findAll()); // Mostra todos os alunos inicialmente
+        return mv;
+    }
+
+    // Serve para filtrar os alunos quando você envia o formulário/modal
+    @PostMapping("/pesquisar-aluno")
+    public ModelAndView pesquisarAluno(@RequestParam(required = false) String nome) {
+        ModelAndView mv = new ModelAndView();
+        List<Aluno> lista;
+        if(nome == null || nome.trim().isEmpty()) {
+            lista = alunoRepository.findAll();
+        } else {
+            lista = alunoRepository.findByNomeContainingIgnoreCase(nome);
+        }
+        mv.addObject("ListaDeAlunos", lista);
+        mv.setViewName("Aluno/pesquisa-resultado"); 
+        return mv;
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable("id")Long id) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Aluno/editar");
-        Aluno aluno = alunoRepository.getById(id);
-        modelAndView.addObject("aluno", aluno);
-        return modelAndView;
+    public ModelAndView editar(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Aluno/editar");
+        mv.addObject("aluno", alunoRepository.getById(id));
+        return mv;
     }
 
     @PostMapping("/editar")
     public ModelAndView editar(Aluno aluno) {
-        ModelAndView modelAndView = new ModelAndView();
         alunoRepository.save(aluno);
-        modelAndView.setViewName("redirect:/alunos-adicionados");
-        return modelAndView;
+        return new ModelAndView("redirect:/alunos-adicionados");
     }
 
     @GetMapping("/remover/{id}")
     public String removerAluno(@PathVariable("id") Long id) {
         alunoRepository.deleteById(id);
         return "redirect:/alunos-adicionados";
-    }
-
-    @GetMapping("filtro-alunos")
-    public ModelAndView filtroAlunos() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Aluno/filtroAlunos");
-        return modelAndView;
-    }
-
-    @GetMapping("alunos-ativos")
-    public ModelAndView listaAlunosAtivos() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Aluno/alunos-ativos");
-        modelAndView.addObject("alunosAtivos", alunoRepository.findByStatusAtivo());
-        return modelAndView;
-    }
-
-    @GetMapping("alunos-inativos")
-    public ModelAndView listaAlunosInativos() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("Aluno/alunos-inativos");
-        modelAndView.addObject("alunosInativos", alunoRepository.findByStatusInativo());
-        return modelAndView;
-    }
-
-    @PostMapping("/pesquisar-aluno")
-    public ModelAndView pesquisarAluno(@RequestParam(required = false) String nome) {
-        ModelAndView modelAndView = new ModelAndView();
-        List<Aluno> listaAlunos;
-        if(nome == null || nome.trim().isEmpty()) {
-            listaAlunos = alunoRepository.findAll();
-        } else {
-            listaAlunos = alunoRepository.findByNomeContainingIgnoreCase(nome);
-        }
-        modelAndView.addObject("ListaDeAlunos", listaAlunos);
-        modelAndView.setViewName("Aluno/pesquisa-resultado");
-        return modelAndView;
     }
 }

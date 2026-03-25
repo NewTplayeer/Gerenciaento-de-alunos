@@ -1,6 +1,5 @@
 package br.com.gerenciamento.controller;
 
-import br.com.gerenciamento.repository.UsuarioRepository;
 import br.com.gerenciamento.exception.ServiceExc;
 import br.com.gerenciamento.model.Aluno;
 import br.com.gerenciamento.model.Usuario;
@@ -21,66 +20,65 @@ import java.security.NoSuchAlgorithmException;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
     private ServiceUsuario serviceUsuario;
 
+    // Rota Raiz: Abre a tela de LOGIN
     @GetMapping("/")
     public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login/login");
-        modelAndView.addObject("usuario", new Usuario());
-        return modelAndView;
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("login/login"); 
+        mv.addObject("usuario", new Usuario());
+        return mv;
     }
 
+    // Rota /index: Abre o Dashboard (Home)
     @GetMapping("/index")
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home/index");
-        modelAndView.addObject("aluno", new Aluno());
-        return modelAndView;
+        ModelAndView mv = new ModelAndView();
+        // AQUI ESTAVA O ERRO! Adicionado a pasta "home/" de volta:
+        mv.setViewName("home/index"); 
+        mv.addObject("aluno", new Aluno());
+        return mv;
     }
 
     @GetMapping("/cadastro")
     public ModelAndView cadastrar() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("usuario", new Usuario());
-        modelAndView.setViewName("login/cadastro");
-        return modelAndView;
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("usuario", new Usuario());
+        mv.setViewName("login/cadastro");
+        return mv;
     }
 
     @PostMapping("/salvarUsuario")
-    public ModelAndView cadastrar(Usuario usuario) throws Exception {
-        ModelAndView modelAndView = new ModelAndView();
+    public ModelAndView salvar(Usuario usuario) throws Exception {
         serviceUsuario.salvarUsuario(usuario);
-        modelAndView.setViewName("redirect:/");
-        return modelAndView;
+        return new ModelAndView("redirect:/");
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@Valid Usuario usuario, BindingResult br,
-                              HttpSession session) throws NoSuchAlgorithmException, ServiceExc {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("usuario", new Usuario());
+    public ModelAndView efetuarLogin(@Valid Usuario usuario, BindingResult br, HttpSession session) throws NoSuchAlgorithmException, ServiceExc {
+        ModelAndView mv = new ModelAndView();
         if(br.hasErrors()) {
-            modelAndView.setViewName("login/login");
+            mv.setViewName("login/login");
+            return mv;
         }
 
         Usuario userLogin = serviceUsuario.loginUser(usuario.getUser(), Util.md5(usuario.getSenha()));
+        
         if(userLogin == null) {
-            modelAndView.addObject("msg","Usuario não encontrado. Tente novamente");
+            mv.setViewName("login/login");
+            mv.addObject("msg","Usuário não encontrado.");
+            return mv;
         } else {
             session.setAttribute("usuarioLogado", userLogin);
-            return index();
+            // Login com sucesso redireciona para a rota /index
+            return new ModelAndView("redirect:/index"); 
         }
-
-        return modelAndView;
     }
 
     @PostMapping("/logout")
-    public ModelAndView logout(HttpSession session) {
+    public String logout(HttpSession session) {
         session.invalidate();
-        return login();
+        return "redirect:/";
     }
 }
