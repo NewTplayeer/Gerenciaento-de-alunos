@@ -14,6 +14,9 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     @Query("SELECT i FROM Aluno i WHERE i.status = 'INATIVO' ")
     public List<Aluno> findByStatusInativo();
 
+    @Query("SELECT AVG(a.notaEnade) FROM Aluno a WHERE a.status = 'ATIVO'")
+    Double calcularMediaEnadeAlunosAtivos();
+
     public List<Aluno> findByNomeContainingIgnoreCase(String nome);
 
 }

@@ -42,6 +42,10 @@ public class Aluno {
     @NotNull
     private Turno turno;
 
+    @Column(name = "nota_enade")
+    private Double notaEnade;
+
+
     public Long getId() {
         return id;
     }

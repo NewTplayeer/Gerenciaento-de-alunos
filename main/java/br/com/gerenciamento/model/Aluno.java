@@ -22,7 +22,7 @@ public class Aluno {
     @NotNull
     private String nome;
 
-    @Colum(name = "email")
+    @Column(name = "email") 
     @Size(max = 100)
     @NotBlank(message = "O e-mail não pode ser vazio")
     @NotNull
@@ -48,59 +48,33 @@ public class Aluno {
     @NotNull
     private Turno turno;
 
-    public Long getId() {
-        return id;
-    }
+    // NOVO CAMPO: Nota do ENADE
+    @Column(name = "nota_enade")
+    private Double notaEnade;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters e Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public Curso getCurso() {
-        return curso;
-    }
+    public String getMatricula() { return matricula; }
+    public void setMatricula(String matricula) { this.matricula = matricula; }
 
-    public String getEmail() {
-        return email;
-    }
+    public Curso getCurso() { return curso; }
+    public void setCurso(Curso curso) { this.curso = curso; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
+    public Turno getTurno() { return turno; }
+    public void setTurno(Turno turno) { this.turno = turno; }
 
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Turno getTurno() {
-        return turno;
-    }
-
-    public void setTurno(Turno turno) {
-        this.turno = turno;
-    }
+    // Getter e Setter para a nota do ENADE
+    public Double getNotaEnade() { return notaEnade; }
+    public void setNotaEnade(Double notaEnade) { this.notaEnade = notaEnade; }
 }

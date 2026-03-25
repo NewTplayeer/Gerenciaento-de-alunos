@@ -14,56 +14,62 @@
 <body>
 
     <div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+    
     <section class="neo-section" style="background-image: url('img/bg-index.jpg');">
-    <div class="sombra"></div>
+        <div class="sombra"></div>
 
-    <div class="center neo-container">
-        <h1 class="texto-centro">Sistema de Gerenciamento de Alunos</h1>
+        <div class="center neo-container">
+            <h1 class="texto-centro">Sistema de Gerenciamento de Alunos</h1>
 
-    <div class="botoes">
+            <div class="botoes">
+                <div class="wm">
+                    <a th:href="@{inserirAlunos}" class="btn-index">CADASTRAR ALUNO</a>
+                </div>
 
-    <div class="wm">
-        <a th:href="@{inserirAlunos}" class="btn-index">CADASTRAR ALUNO</a>
-    </div>
+                <div class="wm">
+                    <a th:href="@{filtro-alunos}" class="btn-index justify-content-center">ENCONTRAR ALUNO</a>
+                </div>
 
-    <div class="wm">
-        <a th:href="@{filtro-alunos}" class="btn-index justify-content-center">ENCONTRAR ALUNO</a>
-    </div>
+                <div class="wm">
+                    <a th:href="@{/calcular-media-enade}" class="btn-index" style="background-color: #17a2b8;">MÉDIA ENADE (ATIVOS)</a>
+                </div>
 
-    <div class="clear"></div>
+                <div class="clear"></div>
+            </div>
+
+            <div th:if="${mediaEnade != null}" class="alert alert-info mt-4" style="max-width: 500px; margin: 0 auto; border-radius: 15px; background: rgba(255,255,255,0.9);">
+                <h4 class="mb-0 text-dark">
+                    Média ENADE: <span th:text="${#numbers.formatDecimal(mediaEnade, 1, 2)}">0.00</span>
+                </h4>
+            </div>
         </div>
-    </div>
     </section>
 
-    <!-- Inicio do Modal -->
     <div class="modal fade" id="modalPesquisa">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-
                     <h5 class="modal-title">Encontre um Aluno</h5>
                     <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
+                        <span>&times;</span>
                     </button>
                 </div>
 
                 <form method="post" action="pesquisar-aluno" th:object="${aluno}">
-
-                <div class="modal-body">
-                    <input type="text" placeholder="Digite o nome do Aluno" th:field="*{nome}">
-                </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" placeholder="Digite o nome do Aluno" th:field="*{nome}">
+                    </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-success">Pesquisar</button>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
+
     <div th:replace="fragmentos/fragmentos :: rodape"></div>
     <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
-

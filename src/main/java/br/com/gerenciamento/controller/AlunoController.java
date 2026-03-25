@@ -4,6 +4,7 @@ import br.com.gerenciamento.repository.AlunoRepository;
 import br.com.gerenciamento.model.Aluno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,13 @@ public class AlunoController {
         modelAndView.setViewName("Aluno/formAluno");
         modelAndView.addObject("aluno", new Aluno());
         return modelAndView;
+    }
+
+    @GetMapping("/calcular-media-enade")
+    public String calcularMedia(Model model) {
+        Double media = repository.calcularMediaEnadeAlunosAtivos();
+        model.addAttribute("mediaEnade", media != null ? media : 0.0);
+        return "home"; 
     }
 
     @PostMapping("InsertAlunos")
