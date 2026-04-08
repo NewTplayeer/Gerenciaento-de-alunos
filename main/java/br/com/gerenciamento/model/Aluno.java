@@ -3,11 +3,12 @@ package br.com.gerenciamento.model;
 import br.com.gerenciamento.enums.Curso;
 import br.com.gerenciamento.enums.Status;
 import br.com.gerenciamento.enums.Turno;
-import com.sun.istack.NotNull;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
 
 @Entity
 public class Aluno {

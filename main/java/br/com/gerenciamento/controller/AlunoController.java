@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -110,7 +110,7 @@ public class AlunoController {
     @GetMapping("/alunos_media_maior_enade")
     public ModelAndView alunosAcimaMediaEnade() {
         ModelAndView mv = new ModelAndView("Aluno/pesquisa-resultado");
-        mv.addObject("ListaDeAlunos", alunoRepository.findAlunosAtivosAcimaMediaEnade());
+        mv.addObject("alunos", alunoRepository.findAlunosAtivosAcimaMediaEnade());
         return mv;
     }
 }
