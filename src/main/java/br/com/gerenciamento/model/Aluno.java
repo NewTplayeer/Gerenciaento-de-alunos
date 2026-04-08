@@ -38,4 +38,68 @@ public class Aluno {
     private String email;
 
     private Double notaEnade;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Double getNotaEnade() {
+        return notaEnade;
+    }
+
+    public void setNotaEnade(Double notaEnade) {
+        this.notaEnade = notaEnade;
+    }
 }

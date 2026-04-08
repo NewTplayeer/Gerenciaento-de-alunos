@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Controller
 public class AlunoController {
@@ -22,7 +22,7 @@ public class AlunoController {
     @GetMapping("/index")
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("home/index");
-        mv.addObject("aluno", new Aluno()); // Necessário para o modal de pesquisa
+        mv.addObject("aluno", new Aluno());
         return mv;
     }
 
@@ -49,27 +49,25 @@ public class AlunoController {
     @GetMapping("/alunos-ativos")
     public ModelAndView listaAlunosAtivos() {
         ModelAndView mv = new ModelAndView("Aluno/alunos-ativos");
-        mv.addObject("alunos", alunoRepository.findAll()); // Podes ajustar se tiveres um findByStatus
+        mv.addObject("alunos", alunoRepository.findAll());
         return mv;
     }
 
     @PostMapping("/pesquisar-aluno")
     public ModelAndView pesquisarAluno(String nome) {
         ModelAndView mv = new ModelAndView("Aluno/pesquisa-resultado");
-        mv.addObject("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
+        mv.addObject("alunos", alunoRepository.findAll().stream()
+                .filter(aluno -> aluno.getNome().toLowerCase().contains(nome.toLowerCase()))
+                .toList());
         return mv;
     }
-
-    // ==========================================
-    // MÉTODOS DO ENADE (Aceitam GET e POST para evitar o Erro 405)
-    // ==========================================
 
     @RequestMapping(value = "/calcular-media", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView calcularMediaEnade() {
         ModelAndView mv = new ModelAndView("home/index");
         Double media = alunoRepository.calcularMediaEnadeAtivos();
         mv.addObject("mediaEnade", media != null ? media : 0.0);
-        mv.addObject("aluno", new Aluno()); // Impede erro no modal
+        mv.addObject("aluno", new Aluno());
         return mv;
     }
 

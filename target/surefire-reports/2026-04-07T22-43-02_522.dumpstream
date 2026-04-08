@@ -1,0 +1,27 @@
+# Created at 2026-04-07T22:43:18.610
+WARNING: A restricted method in java.lang.System has been called
+
+# Created at 2026-04-07T22:43:18.612
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/bruno/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/9.0.62/tomcat-embed-core-9.0.62.jar)
+
+# Created at 2026-04-07T22:43:18.615
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+
+# Created at 2026-04-07T22:43:18.617
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+# Created at 2026-04-07T22:43:18.619
+
+
+# Created at 2026-04-07T22:43:21.098
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+
+# Created at 2026-04-07T22:43:21.100
+WARNING: sun.misc.Unsafe::invokeCleaner has been called by nonapi.io.github.classgraph.utils.FileUtils (file:/C:/Users/bruno/.m2/repository/io/github/classgraph/classgraph/4.8.115/classgraph-4.8.115.jar)
+
+# Created at 2026-04-07T22:43:21.102
+WARNING: Please consider reporting this to the maintainers of class nonapi.io.github.classgraph.utils.FileUtils
+
+# Created at 2026-04-07T22:43:21.103
+WARNING: sun.misc.Unsafe::invokeCleaner will be removed in a future release
+

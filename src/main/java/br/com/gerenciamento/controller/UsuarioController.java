@@ -1,7 +1,6 @@
 package br.com.gerenciamento.controller;
 
 import br.com.gerenciamento.exception.ServiceExc;
-import br.com.gerenciamento.model.Aluno;
 import br.com.gerenciamento.model.Usuario;
 import br.com.gerenciamento.service.ServiceUsuario;
 import br.com.gerenciamento.util.Util;
@@ -22,22 +21,11 @@ public class UsuarioController {
     @Autowired
     private ServiceUsuario serviceUsuario;
 
-    // Rota Raiz: Abre a tela de LOGIN
     @GetMapping("/")
     public ModelAndView login() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login/login"); 
         mv.addObject("usuario", new Usuario());
-        return mv;
-    }
-
-    // Rota /index: Abre o Dashboard (Home)
-    @GetMapping("/index")
-    public ModelAndView index() {
-        ModelAndView mv = new ModelAndView();
-        // AQUI ESTAVA O ERRO! Adicionado a pasta "home/" de volta:
-        mv.setViewName("home/index"); 
-        mv.addObject("aluno", new Aluno());
         return mv;
     }
 
@@ -71,7 +59,6 @@ public class UsuarioController {
             return mv;
         } else {
             session.setAttribute("usuarioLogado", userLogin);
-            // Login com sucesso redireciona para a rota /index
             return new ModelAndView("redirect:/index"); 
         }
     }
