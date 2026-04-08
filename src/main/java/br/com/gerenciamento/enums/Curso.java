@@ -9,10 +9,7 @@ public enum Curso {
     BIOMEDICINA("Biomedicina"),
     DIREITO("Direito");
 
-    private String curso;
-
     private Curso(String curso) {
-        this.curso = curso;
     }
 
 }

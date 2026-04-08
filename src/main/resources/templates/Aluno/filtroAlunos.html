@@ -20,9 +20,9 @@
     <hr>
         <!-- Alunos ativos -->
         <div class="row">
-            <div class="card" style="width: 288px">
+            <div class="card" style="width: 288px; margin-bottom: 20px;">
                 <a th:href="@{/alunos-ativos}">
-                <img class="card-img-top" src="img/alunos.ativos.jpg"/>
+                <img class="card-img-top" src="img/educacao.jpg"/>
                 </a>
             <div class="card-body">
                 <h5 class="card-title">Todos os Alunos Ativos no Sistema</h5>
@@ -30,8 +30,8 @@
                 <a th:href="@{/alunos-ativos}" class="btn btn-outline-primary">Clique Aqui</a>
             </div>
         </div>
-        <!-- Alunos Invativos -->
-            <div class="card mx-lg-3" style="width: 288px">
+        <!-- Alunos Inativos -->
+            <div class="card mx-lg-3" style="width: 288px; margin-bottom: 20px;">
                 <a th:href="@{/alunos-inativos}">
                 <img class="card-img-top" src="img/alunos.inativos.jpg"/>
                 </a>
@@ -39,6 +39,17 @@
                 <h5 class="card-title">Todos os Alunos Inativos no Sistema</h5>
                 <p class="card-text">Lista de todos os alunos inativos no sistema.</p>
                 <a th:href="@{/alunos-inativos}" class="btn btn-outline-primary">Clique Aqui</a>
+                </div>
+            </div>
+        <!-- Alunos Acima da Média ENADE -->
+            <div class="card mx-lg-3" style="width: 288px; margin-bottom: 20px;">
+                <a th:href="@{/alunos_media_maior_enade}">
+                <img class="card-img-top" src="img/educacao.jpg"/>
+                </a>
+            <div class="card-body">
+                <h5 class="card-title">Alunos Acima da Média ENADE</h5>
+                <p class="card-text">Lista de alunos ativos com nota maior ou igual à média.</p>
+                <a th:href="@{/alunos_media_maior_enade}" class="btn btn-outline-info">Clique Aqui</a>
                 </div>
             </div>
         </div>
