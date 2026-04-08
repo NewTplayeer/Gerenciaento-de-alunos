@@ -46,19 +46,29 @@ public class AlunoController {
         return mv;
     }
 
+    @GetMapping("/filtro-alunos")
+    public ModelAndView filtroAlunos() {
+        return new ModelAndView("Aluno/filtroAlunos");
+    }
+
     @GetMapping("/alunos-ativos")
     public ModelAndView listaAlunosAtivos() {
         ModelAndView mv = new ModelAndView("Aluno/alunos-ativos");
-        mv.addObject("alunos", alunoRepository.findAll());
+        mv.addObject("alunos", alunoRepository.findByStatusAtivo());
+        return mv;
+    }
+
+    @GetMapping("/alunos-inativos")
+    public ModelAndView listaAlunosInativos() {
+        ModelAndView mv = new ModelAndView("Aluno/alunos-inativos");
+        mv.addObject("alunos", alunoRepository.findByStatusInativo());
         return mv;
     }
 
     @PostMapping("/pesquisar-aluno")
     public ModelAndView pesquisarAluno(String nome) {
         ModelAndView mv = new ModelAndView("Aluno/pesquisa-resultado");
-        mv.addObject("alunos", alunoRepository.findAll().stream()
-                .filter(aluno -> aluno.getNome().toLowerCase().contains(nome.toLowerCase()))
-                .toList());
+        mv.addObject("alunos", alunoRepository.findByNomeContainingIgnoreCase(nome));
         return mv;
     }
 
